@@ -1,26 +1,433 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/main.css">
-    <title>Eloy Castro's personal website</title>
-  </head>
-  <body>
-    <div id="background">
-      Last login: Sat Sep 06 16:18:22 on console<br />
-      macbook:~ eloy$ curl http://www.eloy.ch/
-    </div>
-    <div class="content">
-      <h1>Hi. My name is Eloy Castro.</h1>
-      <p>I was born in Spain in 1983 and moved to Switzerland in 1991. Nowadays I'm a daddy, a husband and an infrastructure architect at <a href="https://www.baloise.com/" target="_blank">Baloise Group</a>.</p>
-      <p>For more information or contact please visit my <a href="http://www.clusterstorm.ch/" target="_blank">Blog</a> or contact me through the linked social media websites below.</p>
-      <br />
-      <p class="icon">
-        <a href="https://www.twitter.com/eloy83" target="_blank"><img alt="Twitter" src="images/icons/twitter.svg"></a>
-        <a href="https://www.facebook.com/eloy.castro" target="_blank"><img alt="Facebook" src="images/icons/facebook.svg"></a>
-        <a href="https://www.linkedin.com/in/eloycastro" target="_blank"><img alt="LinkedIn" src="images/icons/linkedin.svg"></a>
-        <a href="https://github.com/eloy83" target="_blank"><img alt="GitHub" src="images/icons/github.svg"></a>
-      </p>
-    </div>
-  </body>
-</html>	
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eloy Castro</title>
+  <meta name="description" content="Eloy Castro – IT Infrastruktur Architekt, Vater und Ehemann. Persönliche Webseite mit Links zu meinen Social-Media-Profilen.">
+  <meta name="author" content="Eloy Castro">
+  <meta property="og:title" content="Eloy Castro">
+  <meta property="og:description" content="IT Infrastruktur Architekt bei Helvetia.">
+  <meta property="og:url" content="https://eloy83.github.io/">
+  <meta property="og:type" content="profile">
+  <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318a058'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-size='30' font-weight='700' fill='%23fff'%3EEC%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f6f5f1;
+      --surface: #ffffff;
+      --text: #1b1d22;
+      --muted: #5d6270;
+      --line: #e3e1da;
+      --accent: #12854a;
+      --accent-soft: rgba(18,133,74,.10);
+      --edu: #2f6fd6; --edu-soft: rgba(47,111,214,.12);
+      --move: #b8620b; --move-soft: rgba(184,98,11,.12);
+      --term-bg: #15181e;
+      --term-text: #d7dbe2;
+      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 30px rgba(0,0,0,.06);
+      --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0f1115; --surface: #171a20; --text: #e8eaee; --muted: #9aa1ad;
+        --line: #262a33; --accent: #3ccf80; --accent-soft: rgba(60,207,128,.12); --edu: #6ea8ff; --edu-soft: rgba(110,168,255,.14); --move: #f0a04b; --move-soft: rgba(240,160,75,.14);
+        --term-bg: #0b0d10; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 30px rgba(0,0,0,.35);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0f1115; --surface: #171a20; --text: #e8eaee; --muted: #9aa1ad;
+      --line: #262a33; --accent: #3ccf80; --accent-soft: rgba(60,207,128,.12); --edu: #6ea8ff; --edu-soft: rgba(110,168,255,.14); --move: #f0a04b; --move-soft: rgba(240,160,75,.14);
+      --term-bg: #0b0d10; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 30px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: var(--sans); background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      transition: background .25s, color .25s;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* Top bar */
+    header.top {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 0;
+    }
+    .logo { font-family: var(--mono); font-weight: 700; text-decoration: none; letter-spacing: -.02em; }
+    .logo span { color: var(--accent); }
+    .controls { display: flex; gap: 8px; }
+    .btn {
+      font: 600 13px var(--mono); background: var(--surface); color: var(--text);
+      border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer;
+      transition: border-color .2s, transform .1s;
+    }
+    .btn:hover { border-color: var(--accent); }
+    .btn:active { transform: scale(.97); }
+
+    /* Hero */
+    .hero { padding: 48px 0 32px; }
+    .terminal {
+      background: var(--term-bg); color: var(--term-text); border-radius: 14px;
+      font: 14px/1.7 var(--mono); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .terminal .bar { display: flex; gap: 7px; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .terminal .bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a3f4a; }
+    .terminal .bar i:nth-child(1) { background: #ff5f57; }
+    .terminal .bar i:nth-child(2) { background: #febc2e; }
+    .terminal .bar i:nth-child(3) { background: #28c840; }
+    .terminal pre { margin: 0; padding: 16px 20px 20px; white-space: pre-wrap; }
+    .prompt { color: #3ccf80; }
+    .cursor { display: inline-block; width: 8px; height: 1.1em; background: var(--term-text); vertical-align: text-bottom; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.1; letter-spacing: -.03em;
+      margin: 40px 0 12px;
+    }
+    .lead { font-size: 1.2rem; color: var(--muted); margin: 0; max-width: 60ch; }
+    .lead strong { color: var(--text); font-weight: 600; }
+    .note {
+      margin: 18px 0 0; padding: 10px 14px; max-width: 60ch;
+      font-size: .9rem; color: var(--muted);
+      border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0;
+    }
+
+    /* Sections */
+    section { padding: 32px 0; }
+    h2 {
+      font: 600 13px var(--mono); text-transform: uppercase; letter-spacing: .12em;
+      color: var(--accent); margin: 0 0 18px;
+    }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .fact {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+      padding: 18px 20px; box-shadow: var(--shadow);
+    }
+    .fact .k { font: 12px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .fact .v { font-size: 1.05rem; font-weight: 600; margin-top: 4px; }
+    .fact .v a { text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+    .timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+    .timeline li { position: relative; padding: 0 0 22px 24px; }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before {
+      content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px;
+      border-radius: 50%; background: var(--bg); border: 2px solid var(--accent);
+    }
+    .timeline .year { font: 600 13px var(--mono); color: var(--accent); }
+    .timeline .what { margin: 2px 0 0; }
+    .timeline .tag {
+      font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .06em;
+      margin-left: 10px; padding: 2px 8px; border-radius: 999px; vertical-align: 1px;
+    }
+    .timeline .tag.job { color: var(--accent); background: var(--accent-soft); }
+    .timeline .tag.edu { color: var(--edu); background: var(--edu-soft); }
+    .timeline li.edu::before { border-color: var(--edu); }
+    .timeline li.job::before { background: var(--accent); }
+    .timeline .emo { margin-left: 8px; font-size: 18px; line-height: 1; vertical-align: -2px; }
+    .timeline .tag.move { color: var(--move); background: var(--move-soft); }
+    .timeline li.move::before { border-color: var(--move); }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* Links */
+    .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .link {
+      display: flex; align-items: center; gap: 14px; text-decoration: none;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 16px; box-shadow: var(--shadow);
+      transition: transform .15s, border-color .15s;
+    }
+    .link:hover, .link:focus-visible { transform: translateY(-2px); border-color: var(--accent); outline: none; }
+    .link .ico {
+      flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .link svg { width: 20px; height: 20px; fill: currentColor; }
+    .link .name { font-weight: 600; display: block; }
+    .link .handle { font: 13px var(--mono); color: var(--muted); }
+    .link .arrow { margin-left: auto; color: var(--muted); transition: transform .15s; }
+    .link:hover .arrow { transform: translateX(3px); color: var(--accent); }
+    button.link { font: inherit; color: inherit; width: 100%; text-align: left; cursor: pointer; }
+    button.link:hover .arrow { transform: none; }
+
+    footer {
+      border-top: 1px solid var(--line); margin-top: 40px; padding: 24px 0 40px;
+      font: 13px var(--mono); color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+
+    /* Language switch */
+    body:not([data-lang="de"]) .de,
+    body:not([data-lang="en"]) .en,
+    body:not([data-lang="es"]) .es { display: none !important; }
+    .langs { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+    .langs button {
+      font: 600 12px var(--mono); background: none; color: var(--muted); border: 0;
+      border-radius: 999px; padding: 5px 10px; cursor: pointer; transition: background .2s, color .2s;
+    }
+    .langs button:hover { color: var(--text); }
+    .langs button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .cursor { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body data-lang="de">
+  <div class="wrap">
+    <header class="top">
+      <a class="logo" href="#">eloy<span>.</span>castro</a>
+      <div class="controls">
+        <div class="langs" role="group" aria-label="Sprache / Language / Idioma">
+          <button type="button" data-l="de" lang="de">DE</button>
+          <button type="button" data-l="en" lang="en">EN</button>
+          <button type="button" data-l="es" lang="es">ES</button>
+        </div>
+        <button class="btn" id="themeBtn" type="button" aria-label="Hell/Dunkel umschalten">◐</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="terminal" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <pre><span class="prompt">eloy@macbook:~$</span> whoami
+Eloy Castro
+<span class="prompt">eloy@macbook:~$</span> <span id="typed"></span><span class="cursor"></span></pre>
+        </div>
+
+        <h1>
+          <span class="de">Hallo, ich bin Eloy</span><span class="en">Hi, I'm Eloy</span><span class="es">Hola, soy Eloy</span>
+        </h1>
+        <p class="lead de">
+          Geboren 1983 in Spanien, seit 1991 in der Schweiz zu Hause. Ich bin Vater, Ehemann und
+          arbeite als <strong>IT Infrastruktur Architekt</strong> bei <strong>Helvetia</strong>.
+        </p>
+        <p class="lead en">
+          Born in Spain in 1983, living in Switzerland since 1991. I'm a father, a husband and
+          work as an <strong>IT Infrastructure Architect</strong> at <strong>Helvetia</strong>.
+        </p>
+        <p class="lead es">
+          Nací en España en 1983 y vivo en Suiza desde 1991. Soy padre, marido y
+          trabajo como <strong>Arquitecto de Infraestructura Tecnológica</strong> en <strong>Helvetia</strong>.
+        </p>
+        <p class="note">
+          <span class="de">Dies ist meine private Webseite. Die Inhalte stehen in keiner Verbindung zu meinem Arbeitgeber.</span>
+          <span class="en">This is my private website. Its content is not affiliated with my employer.</span>
+          <span class="es">Esta es mi página web personal. Su contenido no tiene ninguna relación con la empresa para la que trabajo.</span>
+        </p>
+      </div>
+
+      <section class="reveal" aria-labelledby="about">
+        <h2 id="about"><span class="de">Kurz &amp; knapp</span><span class="en">At a glance</span><span class="es">En resumen</span></h2>
+        <div class="facts">
+          <div class="fact">
+            <div class="k"><span class="de">Beruf</span><span class="en">Role</span><span class="es">Profesión</span></div>
+            <div class="v"><span class="de">IT Infrastruktur Architekt</span><span class="en">IT Infrastructure Architect</span><span class="es">Arquitecto de Infraestructura Tecnológica</span></div>
+          </div>
+          <div class="fact">
+            <div class="k"><span class="de">Arbeitgeber</span><span class="en">Employer</span><span class="es">Empresa</span></div>
+            <div class="v"><a href="https://www.helvetia.ch" target="_blank" rel="noopener">Helvetia Schweiz</a></div>
+          </div>
+          <div class="fact">
+            <div class="k"><span class="de">Wohnort</span><span class="en">Based in</span><span class="es">Residencia</span></div>
+            <div class="v"><span class="de">Lostorf, Schweiz 🇨🇭</span><span class="en">Lostorf, Switzerland 🇨🇭</span><span class="es">Lostorf, Suiza 🇨🇭</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal" aria-labelledby="story">
+        <h2 id="story"><span class="de">Stationen</span><span class="en">Milestones</span><span class="es">Trayectoria</span></h2>
+        <ul class="timeline">
+          <li>
+            <div class="year">1983</div>
+            <p class="what"><span class="de">Geboren in O Grove, Spanien 🇪🇸</span><span class="en">Born in O Grove, Spain 🇪🇸</span><span class="es">Nací en O Grove, España 🇪🇸</span></p>
+          </li>
+          <li class="move">
+            <div class="year">1991<span class="tag move"><span class="de">Umzug</span><span class="en">Move</span><span class="es">Mudanza</span></span></div>
+            <p class="what"><span class="de">Olten, Schweiz 🇨🇭</span><span class="en">Olten, Switzerland 🇨🇭</span><span class="es">Olten, Suiza 🇨🇭</span></p>
+          </li>
+          <li class="job">
+            <div class="year">1999<span class="tag job"><span class="de">Arbeitgeber</span><span class="en">Employer</span><span class="es">Empresa</span></span></div>
+            <p class="what">MTF Olten AG</p>
+          </li>
+          <li class="edu">
+            <div class="year">2003<span class="tag edu"><span class="de">Ausbildung</span><span class="en">Education</span><span class="es">Formación</span></span></div>
+            <p class="what">Eidg. dipl. Informatiker</p>
+          </li>
+          <li class="life">
+            <div class="year">2005<span class="emo" aria-hidden="true">👩</span><span class="sr"><span class="de">Privates Ereignis</span><span class="en">Personal event</span><span class="es">Acontecimiento personal</span></span></div>
+          </li>
+          <li class="job">
+            <div class="year">2006<span class="tag job"><span class="de">Arbeitgeber</span><span class="en">Employer</span><span class="es">Empresa</span></span></div>
+            <p class="what">Ringier AG</p>
+          </li>
+          <li class="job">
+            <div class="year">2010<span class="tag job"><span class="de">Arbeitgeber</span><span class="en">Employer</span><span class="es">Empresa</span></span></div>
+            <p class="what">Baloise / Helvetia Schweiz</p>
+          </li>
+          <li class="edu">
+            <div class="year">2011<span class="tag edu"><span class="de">Ausbildung</span><span class="en">Education</span><span class="es">Formación</span></span></div>
+            <p class="what">Dipl. Informatiktechniker HF</p>
+          </li>
+          <li class="move">
+            <div class="year">2012<span class="tag move"><span class="de">Umzug</span><span class="en">Move</span><span class="es">Mudanza</span></span></div>
+            <p class="what"><span class="de">Trimbach, Schweiz 🇨🇭</span><span class="en">Trimbach, Switzerland 🇨🇭</span><span class="es">Trimbach, Suiza 🇨🇭</span></p>
+          </li>
+          <li class="edu">
+            <div class="year">2014<span class="tag edu"><span class="de">Ausbildung</span><span class="en">Education</span><span class="es">Formación</span></span></div>
+            <p class="what">Dipl. Betriebswirtschafter NDS HF</p>
+          </li>
+          <li class="life">
+            <div class="year">2014<span class="emo" aria-hidden="true">💍</span><span class="sr"><span class="de">Heirat</span><span class="en">Wedding</span><span class="es">Boda</span></span></div>
+          </li>
+          <li class="life">
+            <div class="year">2014<span class="emo" aria-hidden="true">👶</span><span class="sr"><span class="de">Geburt 1. Kind</span><span class="en">First child</span><span class="es">Primer hijo</span></span></div>
+          </li>
+          <li class="life">
+            <div class="year">2018<span class="emo" aria-hidden="true">👶</span><span class="sr"><span class="de">Geburt 2. Kind</span><span class="en">Second child</span><span class="es">Segundo hijo</span></span></div>
+          </li>
+          <li class="move">
+            <div class="year">2021<span class="tag move"><span class="de">Umzug</span><span class="en">Move</span><span class="es">Mudanza</span></span></div>
+            <p class="what"><span class="de">Lostorf, Schweiz 🇨🇭</span><span class="en">Lostorf, Switzerland 🇨🇭</span><span class="es">Lostorf, Suiza 🇨🇭</span></p>
+          </li>
+          <li>
+            <div class="year"><span class="de">Heute</span><span class="en">Today</span><span class="es">Hoy</span></div>
+            <p class="what"><span class="de">IT Infrastruktur Architekt bei Helvetia – und Familienmensch. 💻 👨‍👩‍👦‍👦</span><span class="en">IT Infrastructure Architect at Helvetia – and a family man. 💻 👨‍👩‍👦‍👦</span><span class="es">Arquitecto de Infraestructura Tecnológica en Helvetia – y hombre de familia. 💻 👨‍👩‍👦‍👦</span></p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="reveal" aria-labelledby="find">
+        <h2 id="find"><span class="de">Hier findest du mich</span><span class="en">Find me online</span><span class="es">Encuéntrame en</span></h2>
+        <div class="links">
+          <a class="link" href="https://www.linkedin.com/in/eloycastro" target="_blank" rel="noopener me">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></span>
+            <span><span class="name">LinkedIn</span><span class="handle">in/eloycastro</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="link" href="https://github.com/eloy83" target="_blank" rel="noopener me">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg></span>
+            <span><span class="name">GitHub</span><span class="handle">@eloy83</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="link" href="https://bsky.app/profile/eloy83.bsky.social" target="_blank" rel="noopener me">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 10.8C10.9 8.7 8 4.7 5.2 2.8 2.6.9 1.6 1.3.9 1.6.1 1.9 0 3.1 0 3.8c0 .7.4 5.6.6 6.5.8 2.7 3.7 3.7 6.4 3.4-3.9.6-7.4 2-2.8 7.1 5 5.2 6.9-1.1 7.8-4.3.9 3.2 2 9.3 7.7 4.3 4.3-4.3 1.2-6.5-2.7-7.1 2.7.3 5.6-.6 6.4-3.4.2-.8.6-5.8.6-6.5 0-.7-.1-1.9-.9-2.2-.7-.3-1.7-.6-4.3 1.2C16 4.7 13.1 8.7 12 10.8z"/></svg></span>
+            <span><span class="name">Bluesky</span><span class="handle">@eloy83</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="link" href="https://x.com/eloy83" target="_blank" rel="noopener me">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.63 7.58H.49l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41z"/></svg></span>
+            <span><span class="name">X (Twitter)</span><span class="handle">@eloy83</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="link" href="https://www.instagram.com/eloy83/" target="_blank" rel="noopener me">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7z"/><path fill-rule="evenodd" d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/><circle cx="17.5" cy="6.5" r="1.3"/></svg></span>
+            <span><span class="name">Instagram</span><span class="handle">@eloy83</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="link" href="https://www.reddit.com/user/eloy83/" target="_blank" rel="noopener me">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="4.5" cy="11.5" r="2.3"/><circle cx="19.5" cy="11.5" r="2.3"/><circle cx="17.5" cy="3.8" r="1.8"/><path d="M12 8.2 13.2 3l4.3 1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path fill-rule="evenodd" d="M4 14.5a8 6.3 0 1 0 16 0a8 6.3 0 1 0-16 0zm3.6-1a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0zm5.6 0a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0zM8.8 16.6q3.2 2.4 6.4 0q-3.2 1.2-6.4 0z"/></svg></span>
+            <span><span class="name">Reddit</span><span class="handle">u/eloy83</span></span>
+            <span class="arrow">→</span>
+          </a>
+          <button class="link" type="button" id="discordBtn" data-copy="eloy83">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19.5 5.5C17.9 4.8 16.3 4.3 14.7 4l-.4.9a13 13 0 0 0-4.6 0L9.3 4c-1.6.3-3.2.8-4.8 1.5C1.6 9.8.9 14 1.2 18.1c1.9 1.4 3.7 2.2 5.5 2.8l1.2-1.9c-.7-.3-1.3-.6-1.9-1l.5-.4c3.6 1.7 7.5 1.7 11 0l.5.4c-.6.4-1.2.7-1.9 1l1.2 1.9c1.8-.6 3.6-1.4 5.5-2.8.4-4.8-.6-9-3.3-12.6zM8.7 15.6c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2z"/></svg></span>
+            <span><span class="name">Discord</span><span class="handle" aria-live="polite"><span class="h-default">eloy83 · <span class="de">kopieren</span><span class="en">copy</span><span class="es">copiar</span></span><span class="h-done" hidden><span class="de">Kopiert!</span><span class="en">Copied!</span><span class="es">¡Copiado!</span></span></span></span>
+            <span class="arrow">⧉</span>
+          </button>
+          <a class="link" href="https://www.facebook.com/eloy.castro" target="_blank" rel="noopener me">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"/></svg></span>
+            <span><span class="name">Facebook</span><span class="handle">eloy.castro</span></span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year">2026</span> Eloy Castro</span>
+      <span><span class="de">Gehostet auf</span><span class="en">Hosted on</span><span class="es">Alojada en</span> GitHub Pages</span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement, body = document.body;
+      function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+      function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+      // Language: saved choice, else browser language (de/en/es)
+      var LANGS = ['de', 'en', 'es'];
+      var CMD = { de: 'cat ueber-mich.txt', en: 'cat about-me.txt', es: 'cat sobre-mi.txt' };
+      var saved = get('lang');
+      var nav = (navigator.language || 'de').slice(0, 2).toLowerCase();
+      var lang = LANGS.indexOf(saved) > -1 ? saved : (LANGS.indexOf(nav) > -1 ? nav : 'en');
+      var langBtns = document.querySelectorAll('.langs button');
+      function applyLang(l) {
+        body.setAttribute('data-lang', l); root.lang = l;
+        langBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-l') === l); });
+        typeLine(CMD[l]);
+      }
+      langBtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          lang = b.getAttribute('data-l'); set('lang', lang); applyLang(lang);
+        });
+      });
+
+      // Theme
+      var theme = get('theme');
+      if (theme) root.setAttribute('data-theme', theme);
+      document.getElementById('themeBtn').addEventListener('click', function () {
+        var dark = root.getAttribute('data-theme') === 'dark' ||
+          (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+        theme = dark ? 'light' : 'dark'; root.setAttribute('data-theme', theme); set('theme', theme);
+      });
+
+      // Typing effect
+      var typed = document.getElementById('typed'), timer;
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function typeLine(txt) {
+        clearInterval(timer);
+        if (reduce) { typed.textContent = txt; return; }
+        var i = 0; typed.textContent = '';
+        timer = setInterval(function () {
+          typed.textContent = txt.slice(0, ++i);
+          if (i >= txt.length) clearInterval(timer);
+        }, 70);
+      }
+
+      // Reveal on scroll
+      var els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: .15 });
+        els.forEach(function (el) { io.observe(el); });
+      } else { els.forEach(function (el) { el.classList.add('in'); }); }
+
+      // Discord: copy username
+      var dBtn = document.getElementById('discordBtn');
+      dBtn.addEventListener('click', function () {
+        var name = dBtn.getAttribute('data-copy');
+        var def = dBtn.querySelector('.h-default'), done = dBtn.querySelector('.h-done');
+        function ok() { def.hidden = true; done.hidden = false; setTimeout(function () { def.hidden = false; done.hidden = true; }, 1800); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(name).then(ok, function () { prompt('Discord', name); });
+        } else { prompt('Discord', name); }
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+      applyLang(lang);
+    })();
+  </script>
+</body>
+</html>
