@@ -10,8 +10,7 @@
   <meta property="og:description" content="IT Infrastruktur Architekt bei Helvetia.">
   <meta property="og:url" content="https://eloy83.github.io/">
   <meta property="og:type" content="profile">
-  <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#f6f5f1">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318a058'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-size='30' font-weight='700' fill='%23fff'%3EEC%3C/text%3E%3C/svg%3E">
   <style>
     :root {
@@ -29,13 +28,6 @@
       --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 30px rgba(0,0,0,.06);
       --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
       --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
-        --bg: #0f1115; --surface: #171a20; --text: #e8eaee; --muted: #9aa1ad;
-        --line: #262a33; --accent: #3ccf80; --accent-soft: rgba(60,207,128,.12); --edu: #6ea8ff; --edu-soft: rgba(110,168,255,.14); --move: #f0a04b; --move-soft: rgba(240,160,75,.14);
-        --term-bg: #0b0d10; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 30px rgba(0,0,0,.35);
-      }
     }
     :root[data-theme="dark"] {
       --bg: #0f1115; --surface: #171a20; --text: #e8eaee; --muted: #9aa1ad;
@@ -355,7 +347,6 @@ Eloy Castro
 
     <footer>
       <span>© <span id="year">2026</span> Eloy Castro</span>
-      <span><span class="de">Gehostet auf</span><span class="en">Hosted on</span><span class="es">Alojada en</span> GitHub Pages</span>
     </footer>
   </div>
 
@@ -387,8 +378,7 @@ Eloy Castro
       var theme = get('theme');
       if (theme) root.setAttribute('data-theme', theme);
       document.getElementById('themeBtn').addEventListener('click', function () {
-        var dark = root.getAttribute('data-theme') === 'dark' ||
-          (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+        var dark = root.getAttribute('data-theme') === 'dark';
         theme = dark ? 'light' : 'dark'; root.setAttribute('data-theme', theme); set('theme', theme);
       });
 
