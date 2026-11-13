@@ -95,7 +95,7 @@
       font: 600 13px var(--mono); text-transform: uppercase; letter-spacing: .12em;
       color: var(--accent); margin: 0 0 18px;
     }
-    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
     .fact {
       background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
       padding: 18px 20px; box-shadow: var(--shadow);
@@ -103,6 +103,12 @@
     .fact .k { font: 12px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
     .fact .v { font-size: 1.05rem; font-weight: 600; margin-top: 4px; }
     .fact .v a { text-decoration-color: var(--accent); text-underline-offset: 3px; }
+    .fact.has-ico { display: flex; align-items: center; gap: 14px; }
+    .fact .ico {
+      flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center;
+      background: var(--edu-soft); color: var(--edu);
+    }
+    .fact .ico svg { width: 22px; height: 22px; }
 
     .timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
     .timeline li { position: relative; padding: 0 0 22px 24px; }
@@ -231,6 +237,13 @@ Eloy Castro
           <div class="fact">
             <div class="k"><span class="de">Wohnort</span><span class="en">Based in</span><span class="es">Residencia</span></div>
             <div class="v"><span class="de">Lostorf, Schweiz 🇨🇭</span><span class="en">Lostorf, Switzerland 🇨🇭</span><span class="es">Lostorf, Suiza 🇨🇭</span></div>
+          </div>
+          <div class="fact has-ico">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 8.2l3.6 2.6-1.4 4.2H9.8l-1.4-4.2z" fill="currentColor"/><path d="M12 8.2V2.5M15.6 10.8l5.3-1.9M14.2 15l3.3 4.6M9.8 15l-3.3 4.6M8.4 10.8L3.1 8.9"/></svg></span>
+            <div>
+              <div class="k"><span class="de">Fussball</span><span class="en">Football</span><span class="es">Fútbol</span></div>
+              <div class="v">Deportivista</div>
+            </div>
           </div>
         </div>
       </section>
