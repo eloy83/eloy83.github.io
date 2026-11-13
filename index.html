@@ -102,7 +102,8 @@
     }
     .fact .k { font: 12px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
     .fact .v { font-size: 1.05rem; font-weight: 600; margin-top: 4px; }
-    .fact .v a { text-decoration-color: var(--accent); text-underline-offset: 3px; }
+    .fact .v a { text-decoration: none; transition: color .15s; }
+    .fact .v a:hover, .fact .v a:focus-visible { color: var(--accent); }
     .fact.has-ico { display: flex; align-items: center; gap: 14px; }
     .fact .ico {
       flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center;
